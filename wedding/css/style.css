@@ -355,9 +355,15 @@ h1, h2, h3, h4, h5, h6, figure {
 
 #fh5co-counter,
 #fh5co-event {
-  height: 850px;
+  height: 730px;
   float: left;
 }
+.event-info-location{
+  display: flex;
+  justify-content: center;
+}
+
+
 #fh5co-counter .display-t,
 #fh5co-counter .display-tc,
 #fh5co-event .display-t,
@@ -1032,10 +1038,6 @@ form label {
 }
 
 .heart {
-  position: absolute;
-  top: 4em;
-  left: 0;
-  right: 0;
   z-index: 99;
   animation: pulse 1s ease infinite;
 }
@@ -1049,15 +1051,9 @@ form label {
   -ms-border-radius: 50%;
   border-radius: 50%;
 }
-@media screen and (max-width: 768px) {
-  .heart {
-    display: none;
-  }
-}
 
 .couple-half {
-  width: 50%;
-  float: left;
+  width: 100%;
 }
 @media screen and (max-width: 768px) {
   .couple-half {
@@ -1067,7 +1063,10 @@ form label {
 .couple-half h3 {
   font-family: "Sacramento", Arial, serif;
   color: #F14E95;
-  font-size: 30px;
+  font-size: 38px;
+}
+.couple-half p {
+  font-size: 22px;
 }
 .couple-half .groom, .couple-half .bride {
   float: left;
@@ -1110,8 +1109,7 @@ form label {
   text-align: right;
 }
 .couple-half .desc-bride {
-  padding-left: 180px;
-  text-align: left;
+  text-align: center;
 }
 @media screen and (max-width: 480px) {
   .couple-half .groom, .couple-half .bride {
@@ -1224,9 +1222,13 @@ form label {
   display: -moz-inline-stack;
   display: inline-block;
   zoom: 1;
-  *display: inline;
+  display: inline;
   width: 100px;
   height: 100px;
+}
+.event-info-container
+{
+  margin-bottom: 2em !important;
 }
 #fh5co-testimonial .wrap-testimony .testimony-slide figure img {
   width: 100px;
