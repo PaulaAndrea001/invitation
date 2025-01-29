@@ -32,8 +32,8 @@
   <body>
     <script type="module">
       import { getDataUser } from "./js/fetch.js";
-
       import { uploadFile } from "./js/fetch.js";
+      import { confirm } from "./js/fetch.js";
 
       const dropzone = document.getElementById("dropzone");
       const fileInput = document.getElementById("fileInput");
@@ -70,6 +70,10 @@
       document.getElementById("uploadBtn").addEventListener("click", () => {
         uploadFile(fileInput, fileName);
       });
+
+      document.getElementById("confirmButton").addEventListener("click", () => {
+        confirm(localData[0]);
+      })
 
       let localData;
 
@@ -612,6 +616,7 @@
               <button
                 type="submit"
                 class="btn btn-default"
+                id="confirmButton"
               >
                 Confirmar
               </button>
