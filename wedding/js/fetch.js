@@ -34,3 +34,35 @@ export async function confirm(payload) {
     throw error;
   }
 }
+
+export async function uploadFile(fileInput, fileName) {
+
+  if (!fileInput.files.length) {
+      alert('Selecciona un archivo primero.');
+      return;
+  }
+
+  const formData = new FormData();
+  formData.append("file", fileInput.files[0]);
+
+  const apiUrl = api + `/Functions/upload?folder=Antes`;
+
+  try {
+      const response = await fetch(apiUrl, {
+          method: "POST",
+          body: formData
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+          alert("Error: " + data);
+      }else{
+        alert("Gracias por compartir tu video con nostros.");
+        fileInput.value = "";
+        fileName.textContent = "Ningún archivo seleccionado";
+
+      }
+  } catch (error) {
+      console.error("Error al subir el archivo:", error);
+  }
+}
