@@ -31,9 +31,46 @@
 
   <body>
     <script type="module">
-      import { getDataUser } from "/js/fetch.js";
+      import { getDataUser } from "./js/fetch.js";
+      import { uploadFile } from "./js/fetch.js";
 
-      var localData;
+      const dropzone = document.getElementById("dropzone");
+      const fileInput = document.getElementById("fileInput");
+      const fileName = document.getElementById("fileName");
+
+      dropzone.addEventListener("click", () => fileInput.click());
+
+      dropzone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropzone.classList.add("active");
+      });
+
+      dropzone.addEventListener("dragleave", () => {
+        dropzone.classList.remove("active");
+      });
+
+      dropzone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropzone.classList.remove("active");
+
+        if (e.dataTransfer.files.length > 0) {
+          fileInput.files = e.dataTransfer.files;
+          fileName.textContent = e.dataTransfer.files[0].name;
+        }
+      });
+
+      fileInput.addEventListener("change", () => {
+        fileName.textContent =
+          fileInput.files.length > 0
+            ? fileInput.files[0].name
+            : "Ningún archivo seleccionado";
+      });
+
+      document.getElementById("uploadBtn").addEventListener("click", () => {
+        uploadFile(fileInput, fileName);
+      });
+
+      let localData;
 
       async function updateHtmlWithData(data) {
         const dataContainer = document.getElementById("name-guest");
@@ -84,7 +121,9 @@
         }
 
         const div = document.createElement("div");
-        div.innerHTML = `<h2>${ data[0].name + ciaTitle || "Nombre no disponible" }</h2>`;
+        div.innerHTML = `<h2>${
+          data[0].name + ciaTitle || "Nombre no disponible"
+        }</h2>`;
         dataContainer.appendChild(div);
       }
 
@@ -114,7 +153,7 @@
 
     <script>
       function confirmPeople() {
-        console.log('enviar datos');
+        console.log("enviar datos");
       }
     </script>
 
@@ -254,6 +293,37 @@
         transform: translate(0);
         opacity: 1;
       }
+
+      .dropzone {
+        width: 100%;
+        max-width: 400px;
+        padding: 30px;
+        border: 2px dashed #ee9abf;
+        border-radius: 10px;
+        background-color: #f8f9fa;
+        cursor: pointer;
+        transition: background 0.3s;
+        margin: auto;
+      }
+
+      .dropzone:hover {
+        background-color: #e2e6ea;
+      }
+
+      .dropzone.active {
+        background-color: #d1ecf1;
+        border-color: #ee9abf;
+      }
+
+      .dropzone p {
+        margin: 0;
+        font-size: 16px;
+        color: #ee9abf;
+      }
+
+      .hidden {
+        display: none;
+      }
     </style>
 
     <div class="fh5co-loader"></div>
@@ -264,7 +334,7 @@
           <div class="row">
             <div class="col-md-12">
               <div id="fh5co-logo text-center">
-                  <a href="index.html" class="font-size: small">Mis XV</a> 
+                <a href="index.html" class="font-size: small">Mis XV</a>
               </div>
             </div>
           </div>
@@ -287,15 +357,18 @@
                   class="display-tc animate-box"
                   data-animate-effect="fadeIn"
                 >
-                  <h1 style="font-size: xxx-large;">Angie Valentina</h1>
-                  <br>
-                  <br>
-                  <br>
-                  <br>
+                  <h1 style="font-size: xxx-large">Angie Valentina</h1>
+                  <br />
+                  <br />
+                  <br />
+                  <br />
 
-                  <h1 style="font-size: revert;">Tan solo faltan</h1>
-                  <div class="simply-countdown simply-countdown-one" style="margin-bottom: 1.4rem;"></div>
-                  <h1 style="font-size: revert;">Para este dia tan especial</h1>
+                  <h1 style="font-size: revert">Tan solo faltan</h1>
+                  <div
+                    class="simply-countdown simply-countdown-one"
+                    style="margin-bottom: 1.4rem"
+                  ></div>
+                  <h1 style="font-size: revert">Para este dia tan especial</h1>
                 </div>
               </div>
             </div>
@@ -310,24 +383,31 @@
               class="col-md-8 col-md-offset-2 text-center fh5co-heading event-info-container animate-box"
             >
               <div id="name-guest"></div>
-               <br>
+              <br />
               <p>
-                Hay eventos en la vida que son muy especiales y compartirlos con quienes más quiero los convierte en momentos únicos e inolvidables.
+                Hay eventos en la vida que son muy especiales y compartirlos con
+                quienes más quiero los convierte en momentos únicos e
+                inolvidables.
               </p>
             </div>
           </div>
           <div class="couple-wrap animate-box">
             <p class="heart text-center"><i class="icon-heart2"></i></p>
             <div class="couple-half">
-              <div class="desc-bride text-center fh5co-heading" style="margin-top: 40px;">
+              <div
+                class="desc-bride text-center fh5co-heading"
+                style="margin-top: 40px"
+              >
                 <p>Con la bendición de Dios y en compañía de mis padres</p>
 
-                <h2>
-                  
-                </h2>
-                <h3 style="margin-top: 50px;">Johanna Orozco y Jose Contreras</h3>
+                <h2></h2>
+                <h3 style="margin-top: 50px">
+                  Johanna Orozco y Jose Contreras
+                </h3>
 
-                <p style="margin-top: 50px;">Nos complace invitarte a ser parte de este gran día</p>
+                <p style="margin-top: 50px">
+                  Nos complace invitarte a ser parte de este gran día
+                </p>
               </div>
             </div>
           </div>
@@ -342,7 +422,9 @@
         <div class="overlay"></div>
         <div class="container">
           <div class="row">
-            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
+            <div
+              class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box"
+            >
               <span>Nuestro Evento Especial</span>
             </div>
           </div>
@@ -363,18 +445,14 @@
                         <span>Fecha del evento</span>
                         <span>15 Marzo, 2025</span>
                       </div>
-                      <p class="m-0 p-0">
-                        Casa cristal.
-                      </p>
-                      <p class="m-0 p-0">
-                        Av. Cra. 30 N 1B - 24 - Piso 4
-                      </p>
+                      <p class="m-0 p-0">Casa cristal.</p>
+                      <p class="m-0 p-0">Av. Cra. 30 N 1B - 24 - Piso 4</p>
 
                       <a
-                      href="https://maps.app.goo.gl/KWHdCB8hDMk7rh1C8"
-                      class="btn btn-default btn-sm"
+                        href="https://maps.app.goo.gl/KWHdCB8hDMk7rh1C8"
+                        class="btn btn-default btn-sm"
                         >Ver Mapa</a
-                    >
+                      >
                     </div>
                   </div>
                 </div>
@@ -445,22 +523,35 @@
         </div>
       </div>
 
-
       <div id="fh5co-services" class="fh5co-section-gray">
         <div class="container">
           <div class="row animate-box">
             <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
               <h2>Comparte un video con nosotros antes del evento</h2>
 
-              <input type="file" style="border: none;">
+              <div id="dropzone" class="dropzone" style="margin-top: 10rem;">
+                <p>
+                  Arrastra y suelta un archivo aquí<br />o haz clic para
+                  seleccionar uno
+                </p>
+              </div>
 
+              <br />
+              <span id="fileName">Ningún archivo seleccionado</span>
+              <br />
+
+              <a id="uploadBtn" class="btn btn-default btn-sm" style="margin-top: 1.5rem;">🚀 Enviar</a>
+
+              <input
+                type="file"
+                id="fileInput"
+                accept="image/*,video/*"
+                class="hidden"
+              />
             </div>
           </div>
         </div>
       </div>
-
-
-
 
       <div
         id="fh5co-started"
@@ -474,7 +565,9 @@
               <h2>¿Quién te acompaña?</h2>
 
               <p>
-                Por favor ayudanos confirmando tu asistencia y la de tus acompañantes, para tus acompañantes selecciona el check correspondiente.
+                Por favor ayudanos confirmando tu asistencia y la de tus
+                acompañantes, para tus acompañantes selecciona el check
+                correspondiente.
               </p>
 
               <div id="companions"></div>
@@ -542,7 +635,5 @@
     <script src="js/magnific-popup-options.js"></script>
     <script src="js/simplyCountdown.js"></script>
     <script src="js/main.js"></script>
-
-    <script></script>
   </body>
 </html>
