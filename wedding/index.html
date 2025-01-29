@@ -1,327 +1,527 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<html class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>XV Valentina</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="XV Valentina" />
+    <meta name="keywords" content="XV Años" />
+    <meta name="author" content="FREEHTML5.CO" />
 
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>XV Valentina</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="XV Valentina" />
-	<meta name="keywords" content="XV Años" />
-	<meta name="author" content="FREEHTML5.CO" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Sacramento"
+      rel="stylesheet"
+    />
 
-	<!-- 
-	//////////////////////////////////////////////////////
+    <link rel="stylesheet" href="css/animate.css" />
+    <link rel="stylesheet" href="css/icomoon.css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" />
+    <link rel="stylesheet" href="css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/modernizr-2.6.2.min.js"></script>
+  </head>
 
-	FREE HTML5 TEMPLATE 
-	DESIGNED & DEVELOPED by FREEHTML5.CO
-		
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
+  <body>
+    <script type="module">
+      import { getDataUser } from "/js/fetch.js";
 
-	//////////////////////////////////////////////////////
-	 -->
+      var localData;
 
-	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content="" />
-	<meta property="og:image" content="" />
-	<meta property="og:url" content="" />
-	<meta property="og:site_name" content="" />
-	<meta property="og:description" content="" />
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
+      async function updateHtmlWithData(data) {
+        const dataContainer = document.getElementById("name-guest");
+        dataContainer.innerHTML = "";
 
-	<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,600,400italic,700' rel='stylesheet'
-		type='text/css'>
-	<link href="https://fonts.googleapis.com/css?family=Sacramento" rel="stylesheet">
+        let companions = data[0].companions;
+        let ciaTitle = "";
+        if (data[0].isCompanions) {
+          ciaTitle = " & Cía.";
 
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+          const dataCompanions = document.getElementById("companions");
+          dataCompanions.innerHTML = "";
 
-	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
+          companions.forEach((item, index) => {
+            const div = document.createElement("div");
+            div.classList.add("data-item"); // Aplicar el estilo flex
 
-	<!-- Owl Carousel  -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+            // Crear el contenido para mostrar el nombre
+            div.innerHTML = `
+    <h2>${item.name || "Nombre no disponible"}</h2>
+  `;
 
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+            const checkboxWrapper = document.createElement("div");
+            checkboxWrapper.classList.add("checkbox-wrapper-26");
 
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.id = `_checkbox-${index}`;
+            checkbox.checked = item.confirmed || false;
 
-</head>
+            const label = document.createElement("label");
+            label.setAttribute("for", checkbox.id);
 
-<body>
+            const tickMark = document.createElement("div");
+            tickMark.classList.add("tick_mark");
 
-	<div class="fh5co-loader"></div>
+            label.appendChild(tickMark);
 
-	<div id="page">
-		<nav class="fh5co-nav" role="navigation">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-4">
-						<div id="fh5co-logo"><a href="index.html">Mis XV<strong>.</strong></a></div>
-					</div>
-				</div>
+            checkboxWrapper.appendChild(checkbox);
+            checkboxWrapper.appendChild(label);
 
-			</div>
-		</nav>
+            checkbox.addEventListener("change", (event) => {
+              item.confirmed = event.target.checked;
+            });
 
-		<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(images/fondo2.jpeg);"
-			data-stellar-background-ratio="0.5">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center">
-						<div class="display-t">
-							<div class="display-tc animate-box" data-animate-effect="fadeIn">
-								<h1>Valentina Orozco</h1>
-								<div class="simply-countdown simply-countdown-one"></div>
-								<p><a href="#" class="btn btn-default btn-sm">Confirmar Asistencia</a></p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
+            div.appendChild(checkboxWrapper);
 
-		<div id="fh5co-couple">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading event-info-container animate-box">
-						<h2>Hola!</h2>
-						<h3>15 de marzo del 2025</h3>
-						<p>Te invito a celebrar el inicio de una nueva etapa en mi vida, llena de sueños, metas y
-							grandes logros</p>
-					</div>
-				</div>
-				<div class="couple-wrap animate-box">
-					<p class="heart text-center"><i class="icon-heart2"></i></p>
-					<div class="couple-half">
-						<div class="desc-bride">
-							<h3>Con la bendición de Dios y en compañía de mis padres </h3>
-							<p> Paola Orozco y Juan Orozco</p>
-							<h3>Nos complace invitarte a ser parte de este gran día</h3>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+            dataCompanions.appendChild(div);
+          });
+        }
 
-		<div id="fh5co-event" class="fh5co-bg" style="background-image:url(images/img_bg_3.jpg);">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box">
-						<span>Nuestro Evento Especial</span>
-						<h2>XV Años de Valentina</h2>
-					</div>
-				</div>
-				<div class="row">
-					<div class="display-t">
-						<div class="display-tc">
-							<div class="col-md-10 col-md-offset-1 event-info-location">
-								<div class="col-md-6 col-sm-6 text-center">
-									<div class="event-wrap animate-box">
-										<h3>Recepción</h3>
-										<div class="event-col">
-											<i class="icon-clock"></i>
-											<span>Hora Inicio</span>
-											<span>6:00 PM</span>
-										</div>
-										<div class="event-col">
-											<i class="icon-calendar"></i>
-											<span>Fecha del evento</span>
-											<span>15 Marzo, 2025</span>
-										</div>
-										<p class="m-0 p-0">
-											Carrera 81b #6b - 50. Barrio Castilla, Bogotá
-										</p>
-									</div>
+        const div = document.createElement("div");
+        div.innerHTML = `<h2>${
+          data[0].name + ciaTitle || "Nombre no disponible"
+        }</h2>`;
+        dataContainer.appendChild(div);
+      }
 
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+      function setDate() {
+        var d = new Date(new Date().getTime() + 200 * 120 * 120 * 2000);
 
-		<div id="fh5co-services" class="fh5co-section-gray">
-			<div class="container">
+        simplyCountdown(".simply-countdown-one", {
+          year: 2025,
+          month: 3,
+          day: 15,
+        });
 
-				<div class="row animate-box">
-					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-						<h2>Detalles del evento</h2>
-					</div>
-				</div>
+        $("#simply-countdown-losange").simplyCountdown({
+          year: d.getFullYear(),
+          month: d.getMonth() + 1,
+          day: d.getDate(),
+          enableUtc: false,
+        });
+      }
 
-				<div class="row">
-					<div class="col-md-6">
-						<div class="feature-left animate-box" data-animate-effect="fadeInLeft">
-							<span class="icon">
-								<i class="icon-calendar"></i>
-							</span>
-							<div class="feature-copy">
-								<h3>Código de vestimenta</h3>
-								<p>Formal , reservarse el uso de colores rosado  y morado.</p>
-							</div>
-						</div>
+      window.onload = async () => {
+        localData = await getDataUser();
+        updateHtmlWithData(localData);
+        setDate();
+      };
+    </script>
 
-						<div class="feature-left animate-box" data-animate-effect="fadeInLeft">
-							<span class="icon">
-								<i class="icon-image"></i>
-							</span>
-							<div class="feature-copy">
-								<h3>Photoshoot</h3>
-								<p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos
-									cumque dicta adipisci architecto culpa amet.</p>
-							</div>
-						</div>
+    <script>
+      function confirmPeople() {
+        console.log('enviar datos');
+      }
+    </script>
 
-						<div class="feature-left animate-box" data-animate-effect="fadeInLeft">
-							<span class="icon">
-								<i class="icon-video"></i>
-							</span>
-							<div class="feature-copy">
-								<h3>Video Editing</h3>
-								<p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos
-									cumque dicta adipisci architecto culpa amet.</p>
-							</div>
-						</div>
+    <style>
+      .data-item {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 10px;
+        gap: 4rem;
+      }
 
-					</div>
-				</div>
+      .data-item h2 {
+        margin: 0;
+      }
 
+      .data-item input[type="checkbox"] {
+        transform: scale(5);
+      }
 
-			</div>
-		</div>
+      @media (max-width: 600px) {
+        .data-item {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
 
+      .checkbox-wrapper-26 * {
+        -webkit-tap-highlight-color: transparent;
+        outline: none;
+      }
 
-		<div id="fh5co-started" class="fh5co-bg" style="background-image:url(images/img_bg_4.jpg);">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row animate-box">
-					<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-						<h2>Are You Attending?</h2>
-						<p>Please Fill-up the form to notify you that you're attending. Thanks.</p>
-					</div>
-				</div>
-				<div class="row animate-box">
-					<div class="col-md-10 col-md-offset-1">
-						<form class="form-inline">
-							<div class="col-md-4 col-sm-4">
-								<div class="form-group">
-									<label for="name" class="sr-only">Name</label>
-									<input type="name" class="form-control" id="name" placeholder="Name">
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4">
-								<div class="form-group">
-									<label for="email" class="sr-only">Email</label>
-									<input type="email" class="form-control" id="email" placeholder="Email">
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4">
-								<button type="submit" class="btn btn-default btn-block">I am Attending</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
+      .checkbox-wrapper-26 input[type="checkbox"] {
+        display: none;
+      }
 
-		<footer id="fh5co-footer" role="contentinfo">
-			<div class="container">
+      .checkbox-wrapper-26 label {
+        --size: 50px;
 
-				<div class="row copyright">
-					<div class="col-md-12 text-center">
-						<p>
-							<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small>
-							<small class="block">Designed by <a href="http://freehtml5.co/"
-									target="_blank">FREEHTML5.co</a> Demo Images: <a href="http://unsplash.co/"
-									target="_blank">Unsplash</a></small>
-						</p>
-						<p>
-						<ul class="fh5co-social-icons">
-							<li><a href="#"><i class="icon-twitter"></i></a></li>
-							<li><a href="#"><i class="icon-facebook"></i></a></li>
-							<li><a href="#"><i class="icon-linkedin"></i></a></li>
-							<li><a href="#"><i class="icon-dribbble"></i></a></li>
-						</ul>
-						</p>
-					</div>
-				</div>
+        position: relative;
+        display: block;
+        width: var(--size);
+        height: var(--size);
+        margin: 0 auto;
+        background-color: rgb(223, 90, 148);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.2s ease transform, 0.2s ease background-color;
+        overflow: hidden;
+        z-index: 1;
+      }
 
-			</div>
-		</footer>
-	</div>
+      .checkbox-wrapper-26 label:before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 0;
+        left: 0;
+        width: calc(var(--size) * 0.7);
+        height: calc(var(--size) * 0.7);
+        margin: 0 auto;
+        background-color: #fff;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        box-shadow: inset 0 var(--shadow) #ffbeb8;
+        transition: 0.2s ease width, 0.2s ease height;
+      }
 
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
-	</div>
+      .checkbox-wrapper-26 label:hover:before {
+        width: calc(var(--size) * 0.55);
+        height: calc(var(--size) * 0.55);
+        box-shadow: inset 0 var(--shadow) #ff9d96;
+      }
 
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Carousel -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- countTo -->
-	<script src="js/jquery.countTo.js"></script>
+      .checkbox-wrapper-26 label:active {
+        transform: scale(0.9);
+      }
 
-	<!-- Stellar -->
-	<script src="js/jquery.stellar.min.js"></script>
-	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
+      .checkbox-wrapper-26 .tick_mark {
+        position: absolute;
+        top: -1px;
+        right: 0;
+        left: calc(var(--size) * -0.05);
+        width: calc(var(--size) * 0.6);
+        height: calc(var(--size) * 0.6);
+        margin: 0 auto;
+        margin-left: calc(var(--size) * 0.14);
+        transform: rotateZ(-40deg);
+      }
 
-	<!-- // <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/0.0.1/prism.min.js"></script> -->
-	<script src="js/simplyCountdown.js"></script>
-	<!-- Main -->
-	<script src="js/main.js"></script>
+      .checkbox-wrapper-26 .tick_mark:before,
+      .checkbox-wrapper-26 .tick_mark:after {
+        content: "";
+        position: absolute;
+        background-color: #fff;
+        border-radius: 2px;
+        opacity: 0;
+        transition: 0.2s ease transform, 0.2s ease opacity;
+      }
 
-	<script>
-		var d = new Date(new Date().getTime() + 200 * 120 * 120 * 2000);
+      .checkbox-wrapper-26 .tick_mark:before {
+        left: 0;
+        bottom: 0;
+        width: calc(var(--size) * 0.1);
+        height: calc(var(--size) * 0.3);
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.23);
+        transform: translateY(calc(var(--size) * -0.68));
+      }
 
-		// default example
-		simplyCountdown('.simply-countdown-one', {
-			year: 2025,
-			month: 3,
-			day: 15
-		});
+      .checkbox-wrapper-26 .tick_mark:after {
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: calc(var(--size) * 0.1);
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.23);
+        transform: translateX(calc(var(--size) * 0.78));
+      }
 
-		//jQuery example
-		$('#simply-countdown-losange').simplyCountdown({
-			year: d.getFullYear(),
-			month: d.getMonth() + 1,
-			day: d.getDate(),
-			enableUtc: false
-		});
-	</script>
+      .checkbox-wrapper-26 input[type="checkbox"]:checked + label {
+        background-color: #07d410;
+        box-shadow: 0 var(--shadow) #92ff97;
+      }
 
-</body>
+      .checkbox-wrapper-26 input[type="checkbox"]:checked + label:before {
+        width: 0;
+        height: 0;
+      }
 
+      .checkbox-wrapper-26
+        input[type="checkbox"]:checked
+        + label
+        .tick_mark:before,
+      .checkbox-wrapper-26
+        input[type="checkbox"]:checked
+        + label
+        .tick_mark:after {
+        transform: translate(0);
+        opacity: 1;
+      }
+    </style>
+
+    <div class="fh5co-loader"></div>
+
+    <div id="page">
+      <nav class="fh5co-nav" role="navigation">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-4">
+              <div id="fh5co-logo">
+                <a href="index.html">Mis XV<strong>.</strong></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <header
+        id="fh5co-header"
+        class="fh5co-cover"
+        role="banner"
+        style="background-image: url(images/fondo2.jpeg)"
+        data-stellar-background-ratio="0.5"
+      >
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 text-center">
+              <div class="display-t">
+                <div
+                  class="display-tc animate-box"
+                  data-animate-effect="fadeIn"
+                >
+                  <h1>Valentina Orozco</h1>
+                  <div class="simply-countdown simply-countdown-one"></div>
+                  <p>
+                    <a
+                      href="#"
+                      class="btn btn-default btn-sm"
+                      onclick="getDataUser()"
+                      >Confirmar Asistencia</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div id="fh5co-couple">
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-md-8 col-md-offset-2 text-center fh5co-heading event-info-container animate-box"
+            >
+              <div id="name-guest"></div>
+              <h3>15 de marzo del 2025</h3>
+              <p>
+                Te invito a celebrar el inicio de una nueva etapa en mi vida,
+                llena de sueños, metas y grandes logros
+              </p>
+            </div>
+          </div>
+          <div class="couple-wrap animate-box">
+            <p class="heart text-center"><i class="icon-heart2"></i></p>
+            <div class="couple-half">
+              <div class="desc-bride">
+                <h3>Con la bendición de Dios y en compañía de mis padres</h3>
+                <p>Jhoanna Paola Orozco y Jose</p>
+                <h3>Nos complace invitarte a ser parte de este gran día</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="fh5co-event"
+        class="fh5co-bg"
+        style="background-image: url(images/img_bg_3.jpg)"
+      >
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box"
+            >
+              <span>Nuestro Evento Especial</span>
+              <h2>XV Años de Valentina</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="display-t">
+              <div class="display-tc">
+                <div class="col-md-10 col-md-offset-1 event-info-location">
+                  <div class="col-md-6 col-sm-6 text-center">
+                    <div class="event-wrap animate-box">
+                      <h3>Recepción</h3>
+                      <div class="event-col">
+                        <i class="icon-clock"></i>
+                        <span>Hora Inicio</span>
+                        <span>6:00 PM</span>
+                      </div>
+                      <div class="event-col">
+                        <i class="icon-calendar"></i>
+                        <span>Fecha del evento</span>
+                        <span>15 Marzo, 2025</span>
+                      </div>
+                      <p class="m-0 p-0">
+                        Carrera 81b #6b - 50. Barrio Castilla, Bogotá
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="fh5co-services" class="fh5co-section-gray">
+        <div class="container">
+          <div class="row animate-box">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+              <h2>Detalles del evento</h2>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div
+                class="feature-left animate-box"
+                data-animate-effect="fadeInLeft"
+              >
+                <span class="icon">
+                  <i class="icon-calendar"></i>
+                </span>
+                <div class="feature-copy">
+                  <h3>Código de vestimenta</h3>
+                  <p>Formal , reservarse el uso de colores rosado y morado.</p>
+                </div>
+              </div>
+
+              <div
+                class="feature-left animate-box"
+                data-animate-effect="fadeInLeft"
+              >
+                <span class="icon">
+                  <i class="icon-image"></i>
+                </span>
+                <div class="feature-copy">
+                  <h3>Photoshoot</h3>
+                  <p>
+                    Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia
+                    reprehenderit. Eos cumque dicta adipisci architecto culpa
+                    amet.
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="feature-left animate-box"
+                data-animate-effect="fadeInLeft"
+              >
+                <span class="icon">
+                  <i class="icon-video"></i>
+                </span>
+                <div class="feature-copy">
+                  <h3>Video Editing</h3>
+                  <p>
+                    Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia
+                    reprehenderit. Eos cumque dicta adipisci architecto culpa
+                    amet.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="fh5co-started"
+        class="fh5co-bg"
+        style="background-image: url(images/img_bg_4.jpg)"
+      >
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row animate-box">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+              <h2>Are You Attending?</h2>
+
+              <p>
+                Please Fill-up the form to notify you that you're attending.
+                Thanks.
+              </p>
+
+              <div id="companions"></div>
+            </div>
+
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+              <button
+                type="submit"
+                class="btn btn-default"
+                onclick="confirmPeople()"
+              >
+                I am Attending
+              </button>
+            </div>
+          </div>
+          <!-- <div class="row animate-box">
+            <div class="col-md-10 col-md-offset-1">
+              <form class="form-inline">
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="name" class="sr-only">Name</label>
+                    <input
+                      type="name"
+                      class="form-control"
+                      id="name"
+                      placeholder="Name"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <div class="form-group">
+                    <label for="email" class="sr-only">Email</label>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      placeholder="Email"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <button type="submit" class="btn btn-default btn-block">
+                    I am Attending
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="gototop js-top">
+      <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.countTo.js"></script>
+    <script src="js/jquery.stellar.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/magnific-popup-options.js"></script>
+    <script src="js/simplyCountdown.js"></script>
+    <script src="js/main.js"></script>
+
+    <script></script>
+  </body>
 </html>
