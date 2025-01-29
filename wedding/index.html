@@ -266,9 +266,11 @@
       <nav class="fh5co-nav" role="navigation">
         <div class="container">
           <div class="row">
-            <div class="col-xs-4">
+            <div class="col-md-12">
               <div id="fh5co-logo">
-                <a href="index.html">Mis XV<strong>.</strong></a>
+                <center>
+                  <a href="index.html" class="font-size: small">Mis XV</a> 
+                </center>
               </div>
             </div>
           </div>
@@ -291,16 +293,23 @@
                   class="display-tc animate-box"
                   data-animate-effect="fadeIn"
                 >
-                  <h1>Valentina Orozco</h1>
-                  <div class="simply-countdown simply-countdown-one"></div>
-                  <p>
+                  <h1 style="font-size: xxx-large;">Angie Valentina</h1>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                
+
+                  <h1 style="font-size: revert;">Tan solo faltan</h1>
+                  <div class="simply-countdown simply-countdown-one" style="margin-bottom: 1.4rem;"></div>
+                  <h1 style="font-size: revert;">Para este dia tan especial</h1>
+                  <!-- <p>
                     <a
                       href="#"
                       class="btn btn-default btn-sm"
-                      onclick="getDataUser()"
-                      >Confirmar Asistencia</a
+                        >Confirmar Asistencia</a
                     >
-                  </p>
+                  </p> -->
                 </div>
               </div>
             </div>
@@ -315,20 +324,26 @@
               class="col-md-8 col-md-offset-2 text-center fh5co-heading event-info-container animate-box"
             >
               <div id="name-guest"></div>
-              <h3>15 de marzo del 2025</h3>
+              <!-- <h3>15 de marzo del 2025</h3> -->
+               <br>
               <p>
-                Te invito a celebrar el inicio de una nueva etapa en mi vida,
-                llena de sueños, metas y grandes logros
+                Hay eventos en la vida que son muy especiales y compartirlos con quienes más quiero los convierte en momentos únicos e inolvidables.
               </p>
             </div>
           </div>
           <div class="couple-wrap animate-box">
             <p class="heart text-center"><i class="icon-heart2"></i></p>
             <div class="couple-half">
-              <div class="desc-bride">
-                <h3>Con la bendición de Dios y en compañía de mis padres</h3>
-                <p>Jhoanna Paola Orozco y Jose</p>
-                <h3>Nos complace invitarte a ser parte de este gran día</h3>
+              <div class="desc-bride text-center fh5co-heading" style="margin-top: 40px;">
+                <p>Con la bendición de Dios y en compañía de mis padres</p>
+
+                <h2>
+                  
+                </h2>
+                <h3 style="margin-top: 50px;">Johanna Orozco y Jose Contreras</h3>
+
+                <!-- <p style="margin-top: 50px;">Johanna Orozco y Jose Contreras</p> -->
+                <p style="margin-top: 50px;">Nos complace invitarte a ser parte de este gran día</p>
               </div>
             </div>
           </div>
@@ -347,7 +362,6 @@
               class="col-md-8 col-md-offset-2 text-center fh5co-heading animate-box"
             >
               <span>Nuestro Evento Especial</span>
-              <h2>XV Años de Valentina</h2>
             </div>
           </div>
           <div class="row">
@@ -360,7 +374,7 @@
                       <div class="event-col">
                         <i class="icon-clock"></i>
                         <span>Hora Inicio</span>
-                        <span>6:00 PM</span>
+                        <span>7:00 PM</span>
                       </div>
                       <div class="event-col">
                         <i class="icon-calendar"></i>
@@ -368,8 +382,17 @@
                         <span>15 Marzo, 2025</span>
                       </div>
                       <p class="m-0 p-0">
-                        Carrera 81b #6b - 50. Barrio Castilla, Bogotá
+                        Casa cristal.
                       </p>
+                      <p class="m-0 p-0">
+                        Av. Cra. 30 N 1B - 24 - Piso 4
+                      </p>
+
+                      <a
+                      href="https://maps.app.goo.gl/KWHdCB8hDMk7rh1C8"
+                      class="btn btn-default btn-sm"
+                        >Ver Mapa</a
+                    >
                     </div>
                   </div>
                 </div>
@@ -440,6 +463,23 @@
         </div>
       </div>
 
+
+      <div id="fh5co-services" class="fh5co-section-gray">
+        <div class="container">
+          <div class="row animate-box">
+            <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+              <h2>Comparte un video con nosotros antes del evento</h2>
+
+              <input type="file" style="border: none;">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
       <div
         id="fh5co-started"
         class="fh5co-bg"
@@ -449,11 +489,10 @@
         <div class="container">
           <div class="row animate-box">
             <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-              <h2>Are You Attending?</h2>
+              <h2>¿Quién te acompaña?</h2>
 
               <p>
-                Please Fill-up the form to notify you that you're attending.
-                Thanks.
+                Por favor ayudanos confirmando tu asistencia y la de tus acompañantes, para tus acompañantes selecciona el check correspondiente.
               </p>
 
               <div id="companions"></div>
@@ -465,7 +504,7 @@
                 class="btn btn-default"
                 onclick="confirmPeople()"
               >
-                I am Attending
+                Confirmar
               </button>
             </div>
           </div>
